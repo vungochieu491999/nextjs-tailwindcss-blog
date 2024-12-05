@@ -89,7 +89,7 @@ export default function BlogPage({ params }) {
   }
 
   return (
-    <>
+    <main className="container mx-auto">
     <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -163,7 +163,7 @@ export default function BlogPage({ params }) {
         <RenderMdx blog={blog} />
       </div>
     </article>
-    </>
+    </main>
    
   );
 }
