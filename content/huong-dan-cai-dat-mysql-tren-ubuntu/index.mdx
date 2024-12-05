@@ -1,220 +1,309 @@
 ---
-title: "Hướng dẫn cài đặt MYSQL trên Ubuntu"
-description: "Hướng dẫn cài đặt MYSQL trên Ubuntu"
+title: "Hướng dẫn cài đặt MySQL trên Ubuntu"
+description: "Hướng dẫn cài đặt MySQL trên Ubuntu | Hiusvnlabs"
 image: "../../public/blogs/mysql-ubuntu.jpg"
-publishedAt: "2024-11-12"
-updatedAt: "2024-11-12"
+publishedAt: "2024-12-05"
+updatedAt: "2024-12-05"
 author: "hieuvn"
 isPublished: true
 tags: 
-- code quality
-- web development
+- MySQL
+- Ubuntu
+- Databases
 ---
 
 
+**Giới thiệu**
 
-Until now, trying to style an article, document, or blog post with Tailwind has been a tedious task that required a keen eye for typography and a lot of complex custom CSS.
+MySQL là hệ quản trị cơ sở dữ liệu mã nguồn mở (open-source database management system), thường được cài đặt như một phần của bộ LAMP (Linux, Apache, MySQL, PHP/Python/Perl) phổ biến. Nó triển khai mô hình quan hệ và sử dụng Ngôn ngữ Truy vấn Cấu trúc (SQL) để quản lý dữ liệu.
 
-By default, Tailwind removes all of the default browser styling from paragraphs, headings, lists and more. This ends up being really useful for building application UIs because you spend less time undoing user-agent styles, but when you _really are_ just trying to style some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising and unintuitive.
+Hướng dẫn này sẽ hướng dẫn bạn cách cài đặt MySQL phiên bản 8.0 trên máy chủ Ubuntu 20.04. Sau khi hoàn thành, bạn sẽ có một cơ sở dữ liệu quan hệ hoạt động mà bạn có thể sử dụng để xây dựng trang web hoặc ứng dụng tiếp theo của mình.
 
-We get lots of complaints about it actually, with people regularly asking us things like:
+## Yêu cầu
+Để theo dõi hướng dẫn này, bạn sẽ cần:
+- Một máy chủ hệ điều hành Ubuntu 20.04
 
-> Why is Tailwind removing the default styles on my `h1` elements? How do I disable this? What do you mean I lose all the other base styles too?
-> We hear you, but we're not convinced that simply disabling our base styles is what you really want. You don't want to have to remove annoying margins every time you use a `p` element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the user-agent styles either — you want them to look _awesome_, not awful.
+## Bước 1 — Cài đặt MySQL
+Trên Ubuntu 20.04, bạn có thể cài đặt MySQL bằng cách sử dụng kho gói APT. Vào thời điểm viết bài này, phiên bản MySQL có sẵn trong kho gói mặc định của Ubuntu là phiên bản 8.0.27.
+Để cài đặt, cập nhật chỉ mục gói trên máy chủ của bạn nếu bạn chưa làm việc này gần đây:
 
-The `@tailwindcss/typography` plugin is our attempt to give you what you _actually_ want, without any of the downsides of doing something stupid like disabling our base styles.
-
-It adds a new `prose` class that you can slap on any block of vanilla HTML content and turn it into a beautiful, well-formatted document:
-
-```html
-<article className="prose">
-  <h1>Garlic bread with cheese: What the science tells us</h1>
-  <p>
-    For years parents have espoused the health benefits of eating garlic bread
-    with cheese to their children, with the food earning such an iconic status
-    in our culture that kids will often dress up as warm, cheesy loaf for
-    Halloween.
-  </p>
-  <p>
-    But a recent study shows that the celebrated appetizer may be linked to a
-    series of rabies cases springing up around the country.
-  </p>
-</article>
+```console
+sudo apt update
 ```
 
-For more information about how to use the plugin and the features it includes, [read the documentation](https://github.com/tailwindcss/typography/blob/master/README.md).
+Sau đó, cài đặt gói mysql-server:
 
----
-
-## What to expect from here on out
-
-What follows from here is just a bunch of absolute nonsense I've written to dogfood the plugin itself. It includes every sensible typographic element I could think of, like **bold text**, unordered lists, ordered lists, code blocks, block quotes, _and even italics_.
-
-It's important to cover all of these use cases for a few reasons:
-
-1.  We want everything to look good out of the box.
-2.  Really just the first reason, that's the whole point of the plugin.
-3.  Here's a third pretend reason though a list with three items looks more realistic than a list with two items.
-
-Now we're going to try out another header style.
-
-### Typography should be easy
-
-So that's a header for you — with any luck if we've done our job correctly that will look pretty reasonable.
-
-Something a wise person once told me about typography is:
-
-> Typography is pretty important if you don't want your stuff to look like trash. Make it good then it won't be bad.
-
-It's probably important that images look okay here by default as well:
-
-<Image
-  src="/blogs/c-d-x-PDX_a_82obo-unsplash.jpg"
-  width="718"
-  height="404"
-  alt="Image"
-  sizes="100vw"
-/>
-
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-
-Now I'm going to show you an example of an unordered list to make sure that looks good, too:
-
-- So here is the first item in this list.
-- In this example we're keeping the items short.
-- Later, we'll use longer, more complex list items.
-
-And that's the end of this section.
-
-## What if we stack headings?
-
-### We should make sure that looks good, too.
-
-Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.
-
-### When a heading comes after a paragraph …
-
-When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let's see what a more complex list would look like.
-
-- **I often do this thing where list items have headings.**
-
-  For some reason I think this looks cool which is unfortunate because it's pretty annoying to get the styles right.
-
-  I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough honestly, you could make a strong argument that you just shouldn't write this way.
-
-- **Since this is a list, I need at least two items.**
-
-  I explained what I'm doing already in the previous list item, but a list wouldn't be a list if it only had one item, and we really want this to look realistic. That's why I've added this second list item so I actually have something to look at when writing the styles.
-
-- **It's not a bad idea to add a third item either.**
-
-  I think it probably would've been fine to just use two items but three is definitely not worse, and since I seem to be having no trouble making up arbitrary things to type, I might as well include it.
-
-After this sort of list I usually have a closing statement or paragraph, because it kinda looks weird jumping right to a heading.
-
-## Code should look okay by default.
-
-I think most people are going to use [highlight.js](https://highlightjs.org/) or [Prism](https://prismjs.com/) or something if they want to style their code blocks but it wouldn't hurt to make them look _okay_ out of the box, even with no syntax highlighting.
-
-Here's what a default `tailwind.config.js` file looks like at the time of writing:
-
-```js
-module.exports = {
-  purge: [],
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
-}
+```console
+sudo apt install mysql-server
 ```
 
-Hopefully that looks good enough to you.
+Đảm bảo rằng máy chủ đang chạy bằng lệnh systemctl start:
 
-### What about nested lists?
+```console
+sudo systemctl start mysql.service
+```
 
-Nested lists basically always look bad which is why editors like Medium don't even let you do it, but I guess since some of you goofballs are going to do it we have to carry the burden of at least making it work.
+Những lệnh này sẽ cài đặt và khởi động MySQL, nhưng sẽ không yêu cầu bạn thiết lập mật khẩu hoặc thực hiện bất kỳ thay đổi cấu hình nào khác. Vì điều này để lại cài đặt MySQL không an toàn, chúng ta sẽ giải quyết vấn đề này trong bước tiếp theo.
 
-1.  **Nested lists are rarely a good idea.**
-    - You might feel like you are being really "organized" or something but you are just creating a gross shape on the screen that is hard to read.
-    - Nested navigation in UIs is a bad idea too, keep things as flat as possible.
-    - Nesting tons of folders in your source code is also not helpful.
-2.  **Since we need to have more items, here's another one.**
-    - I'm not sure if we'll bother styling more than two levels deep.
-    - Two is already too much, three is guaranteed to be a bad idea.
-    - If you nest four levels deep you belong in prison.
-3.  **Two items isn't really a list, three is good though.**
-    - Again please don't nest lists if you want people to actually read your content.
-    - Nobody wants to look at this.
-    - I'm upset that we even have to bother styling this.
+## Bước 2 — Cấu hình MySQL
 
-The most annoying thing about lists in Markdown is that `<li>` elements aren't given a child `<p>` tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that annoying situation too.
+Đối với các cài đặt mới của MySQL, bạn nên chạy kịch bản bảo mật đi kèm của DBMS. Kịch bản này thay đổi một số tùy chọn mặc định không an toàn đối với các thứ như đăng nhập root từ xa và người dùng mẫu.
 
-- **For example, here's another nested list.**
+Cảnh báo: Tính đến tháng 7 năm 2022, khi bạn chạy kịch bản `mysql_secure_installation`, sẽ xảy ra lỗi nếu không thực hiện một số cấu hình trước. Lý do là kịch bản này sẽ cố gắng thiết lập mật khẩu cho tài khoản root MySQL của cài đặt, nhưng mặc định trên các cài đặt Ubuntu, tài khoản này không được cấu hình để kết nối bằng mật khẩu.
 
-  But this time with a second paragraph.
+Trước tháng 7 năm 2022, kịch bản này sẽ âm thầm thất bại sau khi cố gắng thiết lập mật khẩu cho tài khoản root và tiếp tục với các câu hỏi tiếp theo. Tuy nhiên, hiện tại, kịch bản sẽ trả về lỗi sau khi bạn nhập và xác nhận mật khẩu:
 
-  - These list items won't have `<p>` tags
-  - Because they are only one line each
+**Đầu ra:**
+... Failed! Error: SET PASSWORD has no significance for user 'root'@'localhost' as the authentication method used doesn't store authentication data in the MySQL server. Please consider using ALTER USER instead if you want to change authentication parameters.
 
-- **But in this second top-level list item, they will.**
+Mật khẩu mới:
 
-  This is especially annoying because of the spacing on this paragraph.
+Điều này sẽ dẫn đến kịch bản bị lặp lại trong một vòng lặp vô tận mà bạn chỉ có thể thoát ra bằng cách đóng cửa sổ terminal của mình.
 
-  - As you can see here, because I've added a second line, this list item now has a `<p>` tag.
+Vì kịch bản `mysql_secure_installation` thực hiện một số hành động hữu ích để giữ cho cài đặt MySQL của bạn an toàn, nên vẫn nên chạy nó trước khi bạn bắt đầu sử dụng MySQL để quản lý dữ liệu. Tuy nhiên, để tránh vào vòng lặp vô tận này, bạn cần điều chỉnh cách thức xác thực của người dùng root MySQL trước.
 
-    This is the second line I'm talking about by the way.
+Đầu tiên, mở prompt MySQL:
 
-  - Finally here's another list item so it's more like a list.
+```console
+sudo mysql
+```
 
-- A closing list item, but with no nested list, because why not?
+Sau đó, chạy lệnh ALTER USER sau để thay đổi phương thức xác thực của người dùng root sang phương thức sử dụng mật khẩu. Ví dụ sau đây thay đổi phương thức xác thực sang `mysql_native_password`:
 
-And finally a sentence to close off this section.
+```console
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
 
-## There are other elements we need to style
+Sau khi thực hiện thay đổi này, thoát khỏi prompt MySQL:
 
-I almost forgot to mention links, like [this link to the Tailwind CSS website](https://tailwindcss.com). We almost made them blue but that's so yesterday, so we went with dark gray, feels edgier.
+```console
+exit
+```
 
-We even included table styles, check it out:
+Tiếp theo, bạn có thể chạy lại kịch bản `mysql_secure_installation` mà không gặp vấn đề gì.
 
-| Wrestler                | Origin       | Finisher           |
-| ----------------------- | ------------ | ------------------ |
-| Bret "The Hitman" Hart  | Calgary, AB  | Sharpshooter       |
-| Stone Cold Steve Austin | Austin, TX   | Stone Cold Stunner |
-| Randy Savage            | Sarasota, FL | Elbow Drop         |
-| Vader                   | Boulder, CO  | Vader Bomb         |
-| Razor Ramon             | Chuluota, FL | Razor's Edge       |
+Khi kịch bản bảo mật hoàn tất, bạn có thể mở lại MySQL và thay đổi lại phương thức xác thực của người dùng root về mặc định, `auth_socket`. Để xác thực dưới dạng người dùng root MySQL bằng mật khẩu, hãy chạy lệnh sau:
 
-We also need to make sure inline code looks good, like if I wanted to talk about `<span>` elements or tell you the good news about `@tailwindcss/typography`.
+```console
+mysql -u root -p
+```
 
-### Sometimes I even use `code` in headings
+Sau đó, quay lại sử dụng phương thức xác thực mặc định bằng lệnh:
 
-Even though it's probably a bad idea, and historically I've had a hard time making it look good. This _"wrap the code blocks in backticks"_ trick works pretty well though really.
+```console
+ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
+```
 
-Another thing I've done in the past is put a `code` tag inside of a link, like if I wanted to tell you about the [`tailwindcss/docs`](https://github.com/tailwindcss/docs) repository. I don't love that there is an underline below the backticks but it is absolutely not worth the madness it would require to avoid it.
+Điều này có nghĩa là bạn có thể một lần nữa kết nối với MySQL dưới dạng người dùng root sử dụng lệnh `sudo mysql`.
 
-#### We haven't used an `h4` yet
+Chạy kịch bản bảo mật với `sudo`:
 
-But now we have. Please don't use `h5` or `h6` in your content, Medium only supports two heading levels for a reason, you animals. I honestly considered using a `before` pseudo-element to scream at you if you use an `h5` or `h6`.
+```console
+sudo mysql_secure_installation
+``` 
 
-We don't style them at all out of the box because `h4` elements are already so small that they are the same size as the body copy. What are we supposed to do with an `h5`, make it _smaller_ than the body copy? No thanks.
+Kịch bản này sẽ đưa bạn qua một loạt các câu hỏi, nơi bạn có thể thực hiện một số thay đổi đối với các tùy chọn bảo mật của cài đặt MySQL. Câu hỏi đầu tiên sẽ hỏi bạn có muốn thiết lập Plugin Kiểm tra Mật khẩu hay không, cái có thể được dùng để kiểm tra độ mạnh của mật khẩu các người dùng MySQL mới trước khi coi chúng là hợp lệ.
 
-### We still need to think about stacked headings though.
+Nếu bạn chọn thiết lập Plugin Kiểm tra Mật khẩu, mọi người dùng MySQL mà bạn tạo ra và xác thực bằng mật khẩu sẽ phải có mật khẩu đáp ứng chính sách bạn chọn. Chính sách mạnh nhất — mà bạn có thể chọn bằng cách nhập 2 — sẽ yêu cầu mật khẩu ít nhất dài 8 ký tự và bao gồm sự kết hợp của chữ hoa, chữ thường, chữ số và ký tự đặc biệt.
 
-#### Let's make sure we don't screw that up with `h4` elements, either.
+```console
+Output
+Securing the MySQL server deployment.
 
-Phew, with any luck we have styled the headings above this text and they look pretty good.
+Connecting to MySQL using a blank password.
 
-Let's add a closing paragraph here so things end with a decently sized block of text. I can't explain why I want things to end that way but I have to assume it's because I think things will look weird or unbalanced if there is a heading too close to the end of the document.
+VALIDATE PASSWORD COMPONENT can be used to test passwords
+and improve security. It checks the strength of password
+and allows the users to set only those passwords which are
+secure enough. Would you like to setup VALIDATE PASSWORD component?
 
-What I've written here is probably long enough, but adding this final sentence can't hurt.
+Press y|Y for Yes, any other key for No: Y
 
-## GitHub Flavored Markdown
+There are three levels of password validation policy:
 
-I've also added support for GitHub Flavored Mardown using `remark-gfm`.
+LOW    Length >= 8
+MEDIUM Length >= 8, numeric, mixed case, and special characters
+STRONG Length >= 8, numeric, mixed case, special characters and dictionary                  file
 
-With `remark-gfm`, we get a few extra features in our markdown. Example: autolink literals.
+Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG:
+ 2
+```
 
-A link like www.example.com or https://example.com would automatically be converted into an `a` tag.
+Bất kể bạn có chọn thiết lập Plugin Kiểm tra Mật khẩu hay không, câu hỏi tiếp theo sẽ yêu cầu bạn thiết lập mật khẩu cho người dùng root MySQL. Nhập và xác nhận một mật khẩu an toàn mà bạn chọn:
 
-This works for email links too: contact@example.com.
+```console
+Output
+Please set the password for root here.
+
+
+New password:
+```
+
+Re-enter new password:
+
+Lưu ý rằng mặc dù bạn đã thiết lập mật khẩu cho người dùng root MySQL, nhưng người dùng này hiện không được cấu hình để xác thực bằng mật khẩu khi kết nối vào shell MySQL.
+
+Nếu bạn đã sử dụng Plugin Kiểm tra Mật khẩu, bạn sẽ nhận được phản hồi về độ mạnh của mật khẩu mới. Sau đó, kịch bản sẽ hỏi bạn có muốn tiếp tục với mật khẩu đã nhập hay nhập mật khẩu mới. Nếu bạn hài lòng với độ mạnh của mật khẩu, hãy nhấn Y để tiếp tục kịch bản:
+
+```console
+Output
+Estimated strength of the password: 100
+Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : Y
+```
+
+Từ đó, bạn có thể nhấn Y và ENTER để chấp nhận các tùy chọn mặc định cho tất cả các câu hỏi tiếp theo. Điều này sẽ xóa một số người dùng ẩn danh và cơ sở dữ liệu thử nghiệm, vô hiệu hóa đăng nhập root từ xa và áp dụng các quy tắc mới này để MySQL ngay lập tức tôn trọng các thay đổi bạn đã thực hiện.
+
+Khi kịch bản hoàn tất, cài đặt MySQL của bạn sẽ được bảo mật. Bạn có thể tiếp tục tạo người dùng cơ sở dữ liệu riêng biệt với MySQL client.
+
+## Bước 3 — Tạo Người Dùng MySQL Riêng và Cấp Quyền
+
+Sau khi cài đặt, MySQL sẽ tạo một tài khoản người dùng root mà bạn có thể sử dụng để quản lý cơ sở dữ liệu. Người dùng này có quyền hạn đầy đủ đối với máy chủ MySQL, có nghĩa là nó có quyền kiểm soát hoàn toàn mọi cơ sở dữ liệu, bảng, người dùng, v.v. Vì lý do này, tốt nhất là tránh sử dụng tài khoản này ngoài các chức năng quản trị. Bước này sẽ hướng dẫn bạn cách sử dụng người dùng root MySQL để tạo một tài khoản người dùng mới và cấp quyền cho tài khoản đó.
+
+Trong các hệ thống Ubuntu chạy MySQL 5.7 (và các phiên bản sau), người dùng root MySQL được cấu hình để xác thực qua plugin auth_socket mặc định thay vì bằng mật khẩu. Plugin này yêu cầu tên người dùng hệ điều hành gọi MySQL phải khớp với tên người dùng MySQL trong lệnh, vì vậy bạn phải gọi mysql với quyền sudo để truy cập vào người dùng root MySQL:
+
+```console
+sudo mysql
+```
+
+Lưu ý: Nếu bạn đã cài đặt MySQL theo một hướng dẫn khác và đã kích hoạt xác thực mật khẩu cho root, bạn sẽ cần sử dụng một lệnh khác để truy cập vào giao diện MySQL. Lệnh sau sẽ chạy MySQL client với quyền người dùng thông thường, và bạn chỉ có thể có quyền quản trị trong cơ sở dữ liệu sau khi xác thực:
+
+```console
+mysql -u root -p
+```
+
+Khi đã truy cập vào lời nhắc MySQL, bạn có thể tạo một người dùng mới bằng lệnh CREATE USER. Cú pháp tổng quát của lệnh này là:
+
+```console
+CREATE USER 'username'@'host' IDENTIFIED WITH authentication_plugin BY 'password';
+```
+
+Sau CREATE USER, bạn chỉ định tên người dùng. Tên này sẽ được theo sau bởi ký hiệu @ và tên máy chủ mà người dùng này sẽ kết nối. Nếu bạn chỉ định kết nối người dùng này từ máy chủ Ubuntu của mình, bạn có thể sử dụng localhost. Việc bọc cả tên người dùng và máy chủ trong dấu nháy đơn không phải lúc nào cũng cần thiết, nhưng việc này có thể giúp tránh lỗi.
+
+Bạn có nhiều tùy chọn khi chọn plugin xác thực cho người dùng của mình. Plugin auth_socket đã đề cập trước đây có thể tiện lợi vì nó cung cấp bảo mật mạnh mà không yêu cầu người dùng nhập mật khẩu để truy cập cơ sở dữ liệu. Tuy nhiên, nó cũng ngăn chặn các kết nối từ xa, điều này có thể gây rắc rối khi các chương trình bên ngoài cần tương tác với MySQL.
+
+Một lựa chọn khác là bạn có thể bỏ phần WITH authentication_plugin hoàn toàn trong cú pháp, để người dùng xác thực bằng plugin mặc định của MySQL, caching_sha2_password. Tài liệu MySQL khuyến nghị plugin này cho những người dùng muốn đăng nhập bằng mật khẩu nhờ vào tính năng bảo mật mạnh mẽ của nó.
+
+Chạy lệnh sau để tạo một người dùng xác thực bằng caching_sha2_password. Đảm bảo thay "sammy" bằng tên người dùng bạn chọn và mật khẩu bằng một mật khẩu mạnh mà bạn chọn:
+
+```console
+CREATE USER 'sammy'@'localhost' IDENTIFIED BY 'password';
+```
+
+Lưu ý: Có một vấn đề đã biết với một số phiên bản PHP gây ra sự cố với caching_sha2_password. Nếu bạn dự định sử dụng cơ sở dữ liệu này với một ứng dụng PHP — như phpMyAdmin, ví dụ — bạn có thể muốn tạo một người dùng sẽ xác thực bằng plugin mysql_native_password cũ hơn, mặc dù vẫn bảo mật:
+
+```console
+CREATE USER 'sammy'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+Nếu bạn không chắc chắn, bạn có thể luôn tạo người dùng xác thực với caching_sha2_plugin và sau đó thay đổi nó sau này bằng lệnh này:
+
+```console
+ALTER USER 'sammy'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+Sau khi tạo người dùng mới, bạn có thể cấp quyền thích hợp cho họ. Cú pháp tổng quát để cấp quyền cho người dùng là:
+
+```console
+GRANT PRIVILEGE ON database.table TO 'username'@'host';
+```
+
+Giá trị PRIVILEGE trong cú pháp này xác định các hành động mà người dùng được phép thực hiện trên cơ sở dữ liệu và bảng đã chỉ định. Bạn có thể cấp nhiều quyền cho cùng một người dùng trong một lệnh bằng cách phân tách mỗi quyền bằng dấu phẩy. Bạn cũng có thể cấp quyền cho người dùng trên toàn cầu bằng cách sử dụng dấu hoa thị (*) thay cho tên cơ sở dữ liệu và bảng. Trong SQL, dấu hoa thị là ký tự đặc biệt dùng để đại diện cho "tất cả" cơ sở dữ liệu hoặc bảng.
+
+Để minh họa, lệnh sau sẽ cấp quyền toàn cầu cho người dùng để TẠO, SỬA, và XÓA cơ sở dữ liệu, bảng và người dùng, cũng như quyền INSERT, UPDATE, và DELETE dữ liệu từ bất kỳ bảng nào trên máy chủ. Nó cũng cấp cho người dùng khả năng truy vấn dữ liệu với SELECT, tạo khóa ngoại với từ khóa REFERENCES và thực hiện các thao tác FLUSH với quyền RELOAD. Tuy nhiên, bạn chỉ nên cấp quyền cho người dùng những gì họ cần, vì vậy bạn có thể điều chỉnh quyền cho người dùng của mình nếu cần.
+
+Bạn có thể tìm thấy danh sách đầy đủ các quyền có sẵn trong tài liệu chính thức của MySQL.
+
+Chạy câu lệnh GRANT này, thay thế "sammy" bằng tên người dùng MySQL của bạn, để cấp quyền cho người dùng của bạn:
+
+```console
+GRANT CREATE, ALTER, DROP, INSERT, UPDATE, INDEX, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
+```
+
+Lưu ý rằng câu lệnh này cũng bao gồm WITH GRANT OPTION. Điều này sẽ cho phép người dùng MySQL của bạn cấp bất kỳ quyền nào mà họ có cho các người dùng khác trên hệ thống.
+
+Cảnh báo: Một số người dùng có thể muốn cấp quyền ALL PRIVILEGES cho người dùng MySQL của họ, điều này sẽ cung cấp quyền siêu người dùng rộng rãi tương tự như quyền của người dùng root, như sau:
+
+```console
+GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
+```
+
+Các quyền rộng như vậy không nên được cấp một cách nhẹ nhàng, vì bất kỳ ai có quyền truy cập vào người dùng MySQL này sẽ có toàn quyền kiểm soát mọi cơ sở dữ liệu trên máy chủ.
+
+Sau đó, nên chạy lệnh FLUSH PRIVILEGES. Điều này sẽ giải phóng bất kỳ bộ nhớ nào mà máy chủ đã lưu trữ do các lệnh CREATE USER và GRANT trước đó:
+
+```console
+FLUSH PRIVILEGES;
+```
+
+Sau đó, bạn có thể thoát khỏi MySQL client:
+
+```console
+exit
+```
+
+Trong tương lai, để đăng nhập với người dùng MySQL mới của bạn, bạn sẽ sử dụng lệnh sau:
+
+```console
+mysql -u sammy -p
+```
+
+Cờ -p sẽ yêu cầu MySQL client yêu cầu mật khẩu của người dùng MySQL để xác thực.
+
+Cuối cùng, hãy kiểm tra cài đặt MySQL.
+
+## Bước 4 — Kiểm tra MySQL
+
+Dù bạn đã cài đặt MySQL theo cách nào, MySQL sẽ tự động bắt đầu chạy. Để kiểm tra điều này, hãy kiểm tra trạng thái của nó.
+
+```console
+systemctl status mysql.service
+```
+
+Bạn sẽ thấy kết quả tương tự như sau:
+
+```console
+Output
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2020-04-21 12:56:48 UTC; 6min ago
+   Main PID: 10382 (mysqld)
+     Status: "Server is operational"
+      Tasks: 39 (limit: 1137)
+     Memory: 370.0M
+     CGroup: /system.slice/mysql.service
+             └─10382 /usr/sbin/mysqld
+```
+
+Nếu MySQL không chạy, bạn có thể khởi động lại bằng lệnh sudo systemctl start mysql.
+
+Để kiểm tra thêm, bạn có thể thử kết nối với cơ sở dữ liệu bằng công cụ mysqladmin, một công cụ cho phép bạn chạy các lệnh quản trị. Ví dụ, lệnh này yêu cầu kết nối với người dùng MySQL có tên sammy (-u sammy), yêu cầu mật khẩu (-p), và trả về phiên bản. Hãy chắc chắn thay "sammy" bằng tên người dùng MySQL của bạn và nhập mật khẩu của người dùng đó khi được yêu cầu:
+
+```console
+sudo mysqladmin -p -u sammy version
+```
+
+Bạn sẽ thấy kết quả tương tự như sau:
+
+```console
+Output
+mysqladmin  Ver 8.0.19-0ubuntu5 for Linux on x86_64 ((Ubuntu))
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle là thương hiệu đã đăng ký của Oracle Corporation và/hoặc các công ty liên kết của họ. Các tên khác có thể là thương hiệu của các chủ sở hữu tương ứng.
+
+Server version        8.0.19-0ubuntu5
+Protocol version    10
+Connection        Localhost qua UNIX socket
+UNIX socket        /var/run/mysqld/mysqld.sock
+Uptime:            10 phút 44 giây
+
+Threads: 2  Questions: 25  Slow queries: 0  Opens: 149  Flush tables: 3  Open tables: 69  Queries per
+
+ second avg: 0.038
+```
+
+Điều này có nghĩa là MySQL đang hoạt động.
+
+Kết luận
+
+Bây giờ bạn đã cài đặt thành công MySQL cơ bản trên máy chủ của mình. Dưới đây là một vài ví dụ về các bước tiếp theo bạn có thể thực hiện:

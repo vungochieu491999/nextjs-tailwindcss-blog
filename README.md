@@ -4,6 +4,9 @@
 - ✏️ Starter Code: https://github.com/codebucks27/Nextjs-contentlayer-blog
 - ✏️ Final Code: https://github.com/codebucks27/Nextjs-tailwindcss-blog-template
 
+### Refer:
+- [Demo](https://hieuvnlabs-blog.vercel.app).
+
 ### Increment View function:
 ```
 CREATE OR REPLACE FUNCTION increment(slug_text text)

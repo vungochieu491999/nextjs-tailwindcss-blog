@@ -6,7 +6,7 @@ const siteMetadata = {
     description: 'Hiusvnlabs Blog',//'A blog created with Next.js, Tailwind.css and contentlayer.',
     language: 'en-us',
     theme: 'system', // system, dark or light
-    siteUrl: 'https://hieuvnxx.com', // your website URL
+    siteUrl: 'https://hiusvnlabs.com', // your website URL
     siteLogo: '/logo.png',
     socialBanner: '/social-banner.png', // add social banner in the public folder
     email: 'vungochieu491999@gmail.com', 
