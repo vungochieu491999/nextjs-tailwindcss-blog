@@ -1,12 +1,12 @@
 // please update required information
 const siteMetadata = {
-    title: 'Hiusvnlabs Blog Blog With Tailwind CSS and Contentlayer',
-    author: 'Hiusvn',
-    headerTitle: 'Hiusvnlabs Blog',
-    description: 'Hiusvnlabs Blog',//'A blog created with Next.js, Tailwind.css and contentlayer.',
+    title: 'Hiusvu Blog',
+    author: 'Hiusvu',
+    headerTitle: 'Hiusvu Blog',
+    description: 'Hiusvu Blog',//'A blog created with Next.js, Tailwind.css and contentlayer.',
     language: 'en-us',
     theme: 'system', // system, dark or light
-    siteUrl: 'https://hiusvnlabs.com', // your website URL
+    siteUrl: 'https://hiusvu.io.vn', // your website URL
     siteLogo: '/logo.png',
     socialBanner: '/social-banner.png', // add social banner in the public folder
     email: 'vungochieu491999@gmail.com', 

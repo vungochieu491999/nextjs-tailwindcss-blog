@@ -7,7 +7,7 @@ export default function Home() {
   
   return (
     <main className="flex flex-col items-center justify-center container mx-auto">
-      <HomeCoverSection posts={allPosts} />
+      {/* <HomeCoverSection posts={allPosts} /> */}
       <FeaturedPosts posts={allPosts} />
       <RecentPosts posts={allPosts} />
     </main>
